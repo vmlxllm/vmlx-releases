@@ -6,7 +6,7 @@ Run AI locally on Apple Silicon with voice, vision, Mamba, 5-layer caching, and 
 
 ## Download
 
-**[Download vMLX 1.0.0 for macOS](https://github.com/vmlxllm/vmlx-releases/releases/latest)** (Apple Silicon, arm64)
+**[Download vMLX for macOS](https://github.com/vmlxllm/vmlx-releases/releases/latest)** (Apple Silicon, arm64)
 
 Or visit [vmlx.net/download](https://vmlx.net/download) for installation instructions.
 
@@ -14,9 +14,11 @@ Or visit [vmlx.net/download](https://vmlx.net/download) for installation instruc
 
 | | Minimum | Recommended |
 |---|---|---|
-| **Platform** | macOS 12+ (Monterey) | macOS 14+ (Sonoma) |
+| **Platform** | macOS 26+ (Tahoe) | macOS 26+ (Tahoe) |
 | **Chip** | Apple Silicon (M1) | M1 Pro or later |
 | **RAM** | 8 GB unified memory | 16 GB+ (for 7B–20B models) |
+
+> **Note:** MLX requires Metal 4.0, which is only available on macOS 26 (Tahoe) or later. Earlier macOS versions will not work.
 
 More unified memory = larger models. 16 GB handles up to ~20B parameters, 32 GB handles ~35B, 64 GB handles ~70B, and 192 GB handles 400B+ MoE models.
 
@@ -35,6 +37,7 @@ The app is code-signed and notarized by Apple — no Gatekeeper warnings.
 - **Multi-model sessions** — run multiple models simultaneously
 - **Streaming chat** with OpenAI-compatible API
 - **5-layer caching** — prefix + paged KV + q4/q8 quantization + batching + disk
+- **Speculative decoding** — draft model acceleration for faster inference
 - **50+ auto-detected architectures** — Llama, Qwen, Mistral, Gemma, Phi, Mamba, and more
 - **Vision & multimodal** — image understanding with VLMs
 - **Voice chat** — speak to your models
