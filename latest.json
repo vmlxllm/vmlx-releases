@@ -1,5 +1,5 @@
 {
-  "version": "1.1.7",
-  "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.1.7",
-  "notes": "Fix Mistral3/Pixtral VLM text-only crash, stale cached_tokens, Responses API text format validation"
+  "version": "1.1.9",
+  "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.1.9",
+  "notes": "Remove regex VLM detection, preemptive torchvision patch, fix shared qwen3_5 model_type"
 }
