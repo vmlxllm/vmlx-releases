@@ -1,5 +1,5 @@
 {
-  "version": "1.1.6",
-  "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.1.6",
-  "notes": "Deep engine audit: 40+ fixes across cache subsystem, continuous batching, streaming, VLM, hybrid SSM, tool calling, and API parity"
+  "version": "1.1.7",
+  "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.1.7",
+  "notes": "Fix Mistral3/Pixtral VLM text-only crash, stale cached_tokens, Responses API text format validation"
 }
