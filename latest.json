@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
-  "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.2.0",
-  "notes": "Fix HuggingFace download progress, fix NaN/Unknown in HF browser, fix macOS 15 launch (GitHub #10), deep stability audit (14 fixes: paged cache blocks, KV dequantize safety, reasoning markers, tool fallback, Mistral JSON), CancelledError SSE fix, 2125 tests"
+  "version": "1.2.1",
+  "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.2.1",
+  "notes": "Fix auto-tool-choice default blocking MCP and built-in tools (enableAutoToolChoice: false → undefined auto-detect), fix MCP tool result truncation (prevents context overflow), fix buildCommandPreview parity with buildArgs, 2137 tests"
 }
