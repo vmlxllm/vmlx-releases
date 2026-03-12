@@ -1,5 +1,5 @@
 {
   "version": "1.2.1",
   "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.2.1",
-  "notes": "Fix auto-tool-choice blocking tools, stop button reliability for fast models, tooltip/reasoning UI fixes, rich tool call display, 2139 tests"
+  "notes": "Chat UI overhaul with rich tool display, inline diffs, logs panel, design system with light/dark themes, layout shell with sidebar, encrypted API keys, 3422 tests"
 }
