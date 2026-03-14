@@ -1,5 +1,5 @@
 {
-  "version": "1.2.1",
-  "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.2.1",
-  "notes": "Nemotron/Mamba hybrid fix, reasoning boxes, GPT-OSS/GLM-4 reasoning restore, download search sorting, chat UI overhaul, light/dark themes, logs panel, encrypted API keys, 2692 tests"
+  "version": "1.2.2",
+  "url": "https://github.com/vmlxllm/vmlx-releases/releases/tag/v1.2.2",
+  "notes": "Critical fix: removed default system prompt that caused abliterated/CRACK models to refuse. Nemotron/Mamba hybrid fix, reasoning auto-detect restore, SSM build patch, download sorting, chat UI overhaul, themes, logs panel, encrypted API keys"
 }
