@@ -17,8 +17,17 @@
 </p>
 
 <p align="center">
-  <a href="#download">Download</a> &bull;
-  <a href="#quick-start">Quick Start</a> &bull;
+  <a href="https://github.com/jjang-ai/mlxstudio/releases/latest">
+    <img src="https://img.shields.io/badge/%E2%AC%87%EF%B8%8F_Download_DMG-Latest_Release-blue?style=for-the-badge&logo=apple&logoColor=white" alt="Download DMG" height="40">
+  </a>
+</p>
+
+<p align="center">
+  <b>No Python. No terminal. No config files.</b><br>
+  Download the DMG, drag to Applications, and run AI models locally in seconds.
+</p>
+
+<p align="center">
   <a href="#features">Features</a> &bull;
   <a href="#screenshots">Screenshots</a> &bull;
   <a href="#api-server">API Server</a> &bull;
@@ -34,15 +43,26 @@ MLX Studio is a complete desktop app for running LLMs, VLMs, and image generatio
 
 ---
 
-## Download
+## Install
 
-> **[Download the latest DMG](https://github.com/jjang-ai/mlxstudio/releases/latest)**
+### Option 1: Download the App (Recommended)
+
+> **[Download the latest DMG](https://github.com/jjang-ai/mlxstudio/releases/latest)** -- one file, ready to go.
 
 1. Download `vMLX-X.Y.Z-arm64.dmg`
 2. Open the DMG and drag to Applications
-3. Launch MLX Studio -- no Python, no terminal, no config files needed
+3. Launch -- that's it
 
-All releases are code-signed and notarized by Apple for macOS Gatekeeper.
+All releases are code-signed and notarized by Apple for macOS Gatekeeper. No Homebrew, no pip, no Xcode required.
+
+### Option 2: pip install (CLI only)
+
+```bash
+pip install vmlx
+vmlx serve mlx-community/Qwen3-8B-4bit
+```
+
+This gives you the inference engine without the GUI. See [vMLX on PyPI](https://pypi.org/project/vmlx/).
 
 ---
 
@@ -303,39 +323,6 @@ See the [vMLX source repo](https://github.com/jjang-ai/vmlx#advanced-quantizatio
 | **Chip** | Apple Silicon (M1 / M2 / M3 / M4) |
 | **RAM** | 8 GB (16 GB+ recommended for larger models) |
 | **Disk** | ~500 MB for app; models range from 1-50 GB each |
-
----
-
-## Also Available via pip
-
-The vMLX inference engine is also available as a standalone Python package:
-
-```bash
-pip install vmlx
-vmlx serve mlx-community/Qwen3-8B-4bit
-```
-
-Full CLI with all features -- continuous batching, prefix cache, tool calling, image generation, and more. See [vMLX on PyPI](https://pypi.org/project/vmlx/) and the [source repository](https://github.com/jjang-ai/vmlx).
-
-**CLI options:**
-
-```bash
-vmlx serve <model> [OPTIONS]
-  --port 8000                        # Server port
-  --host 0.0.0.0                     # Bind address
-  --continuous-batching              # Enable multi-user serving
-  --enable-prefix-cache              # Enable semantic caching
-  --cache-type [auto|kv|prefix|paged]
-  --cache-memory-percent 0.30        # RAM allocation for cache
-  --max-num-seqs 32                  # Max concurrent users
-  --tool-call-parser [auto|qwen|llama|mistral|...]
-  --reasoning-parser [auto|qwen3|deepseek_r1|gptoss]
-  --enable-thinking                  # Toggle reasoning mode
-  --api-key <secret>                 # Optional auth
-  --rate-limit 60                    # Requests per minute
-  --enable-jit                       # mx.compile optimization
-  --mcp-config mcp.json             # MCP server config
-```
 
 ---
 
