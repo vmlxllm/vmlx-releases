@@ -1,1 +1,1 @@
-{"version":"1.3.6","url":"https://github.com/jjang-ai/mlxstudio/releases/tag/v1.3.6","notes":"Disk streaming, Mistral 4 support, Metal fixes, reranker fix"}
+{"version":"1.3.8","url":"https://github.com/jjang-ai/mlxstudio/releases/tag/v1.3.8","notes":"SSD streaming fixes, hybrid SSM support, cross-system audit, Anthropic fix"}
