@@ -1,1 +1,1 @@
-{"version":"1.3.11","url":"https://github.com/jjang-ai/mlxstudio/releases/download/v1.3.11/vMLX-1.3.11-arm64.dmg","notes":"API Gateway dashboard, Ollama streaming, hybrid SSM cache fixes"}
+{"version":"1.3.12","url":"https://github.com/jjang-ai/mlxstudio/releases/download/v1.3.12/vMLX-1.3.12-arm64.dmg","notes":"Hybrid SSM prefix cache fix (Nemotron, Qwen3.5), QuantizedKVCache meta preservation, SSD streaming toggle restored, gateway port auto-fallback"}
