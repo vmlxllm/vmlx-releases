@@ -1,1 +1,1 @@
-{"version":"1.3.28","url":"https://github.com/jjang-ai/mlxstudio/releases/tag/v1.3.28","notes":"Gemma 4 VLM image fix, memory leak hardening, deep audit fixes"}
+{"version":"1.3.29","url":"https://github.com/jjang-ai/mlxstudio/releases/tag/v1.3.29","notes":"Gemma 4 streaming fix, embedding routing, MCP types, SSM cache, chunked eval, prefill-step-size"}
