@@ -1,1 +1,1 @@
-{"version":"1.3.29","url":"https://github.com/jjang-ai/mlxstudio/releases/tag/v1.3.29","notes":"Gemma 4 streaming fix, embedding routing, MCP types, SSM cache, chunked eval, prefill-step-size"}
+{"version":"1.3.30","url":"https://github.com/jjang-ai/mlxstudio/releases/tag/v1.3.30","notes":"Smelt mode fixes (MiniMax gate dequant, MoE class names, Nemotron expert index), partial expert loading for MoE models"}
