@@ -356,6 +356,8 @@ For MoE models that don't fit in RAM, **Smelt** loads only a subset of experts p
 
 Clean RAM / tok-s benchmarks on a dedicated machine to follow. More JANG smelt reference models will be added as they're measured.
 
+> **Credit**: Smelt mode is inspired by [Anemll's **flash-moe**](https://github.com/Anemll/flash-moe) — a pure C / Objective‑C / Metal inference engine that showed huge MoE models (Qwen3.5-397B) can run on modest Apple Silicon hardware by streaming expert weights from SSD with `pread()` on demand. vMLX Smelt takes a different implementation path: Python/MLX, tied to the JANG quantization format, and loading a fixed subset of experts per layer at startup (backbone resident, routing biased toward the loaded subset) rather than on-demand per-token. It plugs into the full vMLX server with continuous batching, paged cache, and OpenAI-compatible API. Different engine, same core insight — thanks to the flash-moe team for validating the approach.
+
 **Smelt is mutually exclusive with VLM mode.** MLX Studio / vMLX v1.3.33+ automatically disables `--is-mllm` when smelt is active (with a warning) because the vision tower is not wired through the partial-expert loader — image input on a smelt-loaded VLM would produce garbage logits. Use a text-only model when running smelt, or disable smelt when running a VLM.
 
 Requires an MoE model in JANG format. Not compatible with dense models (no experts to partial-load).
