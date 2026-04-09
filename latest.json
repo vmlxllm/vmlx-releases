@@ -1,1 +1,1 @@
-{"version":"1.3.30","url":"https://github.com/jjang-ai/mlxstudio/releases/tag/v1.3.30","notes":"Metal GPU timeout fix for large models, internal improvements"}
+{"version":"1.3.31","url":"https://github.com/jjang-ai/mlxstudio/releases/tag/v1.3.31","notes":"4-agent audit Phase 5 polish (22 fixes): cross-session prefix cache sharing, Aho-Corasick stop matching, SSM companion cache extraction, Gemma 4 native shim, mlx-lm 0.31.2 bump. 263/263 cache tests PASS."}
