@@ -344,6 +344,24 @@ MLX Studio supports standard MLX quantization (4-bit, 8-bit) as well as **JANG a
 
 See the [vMLX source repo](https://github.com/jjang-ai/vmlx#advanced-quantization) for profiles and conversion details.
 
+### Smelt Mode (Partial Expert Loading)
+
+For MoE models that don't fit in RAM, **Smelt** loads only a subset of experts per layer from SSD and keeps the backbone resident. Response quality stays coherent while RAM usage drops dramatically; throughput scales inversely with expert % loaded because expert swaps hit SSD on the hot path.
+
+**Live measurements on `Nemotron-Cascade-2-30B-A3B-JANG_4M-CRACK`** (23 MoE layers × 128 experts/layer, 16.5 GB expert weights + 1.7 GB backbone, Apple M3 Ultra / 128 GB RAM, macOS 25.3, vMLX v1.3.33):
+
+| `--smelt-experts` | Active RAM | tok/s | Coherent? | Notes |
+|---|---:|---:|---|---|
+| _off (baseline)_ | **17408 MB** | **89.9** | ✓ | All 128/128 experts resident |
+| `50` | 9529 MB (**−45%**) | 21.4 (−76%) | ✓ | 64/128 experts per layer |
+| `25` | 5590 MB (**−68%**) | 8.0 (−91%) | ✓ | 32/128 experts per layer |
+
+All three configurations produced coherent, non-looping output on a 40-word story prompt. The quality bar is set by routing behavior, not expert count.
+
+**Smelt is mutually exclusive with VLM mode.** MLX Studio / vMLX v1.3.33+ automatically disables `--is-mllm` when smelt is active (with a warning) because the vision tower is not wired through the partial-expert loader — image input on a smelt-loaded VLM would produce garbage logits. Use a text-only model when running smelt, or disable smelt when running a VLM.
+
+Requires an MoE model in JANG format (e.g. `Nemotron-Cascade-2-30B-A3B-JANG_4M-CRACK`, `Qwen3.5-35B-A3B-JANG_2S-TEXT`). Not compatible with dense models (no experts to partial-load).
+
 ---
 
 ## System Requirements
