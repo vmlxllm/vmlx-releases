@@ -1,1 +1,1 @@
-{"version":"1.3.35","url":"https://github.com/jjang-ai/mlxstudio/releases/download/v1.3.35/vMLX-1.3.35-arm64.dmg","notes":"Gemma 4 JANG expert key fix, smelt mode fixes, state machine crash fix, chat defaults, max speed session defaults, Quick Start Guide"}
+{"version":"1.3.36","url":"https://github.com/jjang-ai/mlxstudio/releases/download/v1.3.36/vMLX-1.3.36-arm64.dmg","notes":"Flash MoE SSD expert streaming, deep-sleep/wake fix, Ollama enable_thinking fix, auto-updater parallel fetch, proper session defaults, tooltip overflow fix","pub_date":"2026-04-10T22:00:00Z"}
