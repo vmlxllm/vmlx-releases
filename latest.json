@@ -1,1 +1,1 @@
-{"version":"1.3.42","url":"https://github.com/jjang-ai/mlxstudio/releases/download/v1.3.42/vMLX-1.3.42-arm64.dmg","notes":"Reasoning OFF properly suppressed. Sub-0.7s TTFT on all model families. Tool-call loop fix, VLM multi-turn fix, GLM-5.1 support, cache audit fixes."}
+{"version":"1.3.43","url":"https://github.com/jjang-ai/mlxstudio/releases/download/v1.3.43/vMLX-1.3.43-arm64.dmg","notes":"Cache defaults optimized (10% RAM, 500 blocks). All reasoning-OFF, tool-loop, VLM, cache fixes from v1.3.40-v1.3.42."}
