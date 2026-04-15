@@ -1,6 +1,5 @@
 <p align="center">
-  <img src="assets/vmlx.ai/svg/vmlx-lockup.svg#gh-light-mode-only" alt="vMLX" height="88" />
-  <img src="assets/vmlx.ai/svg/vmlx-lockup-light.svg#gh-dark-mode-only" alt="vMLX" height="88" />
+  <img src="assets/vmlx-icon.png" alt="vMLX" width="128" height="128" />
 </p>
 
 <h1 align="center">vMLX — Swift (dev branch)</h1>
