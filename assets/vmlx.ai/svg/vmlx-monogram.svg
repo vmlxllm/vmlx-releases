@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  vMLX monogram — a stylized "vM" lockup that resolves to the X of MLX.
+  Geometric grotesque, single-stroke, square aspect, scales cleanly from
+  16px to 1024px without pixel hinting tricks. Designed to drop into the
+  AppIcon.appiconset and any single-glyph badge slot.
+
+  Construction: two diagonal strokes meet at the visual center to form
+  both the V and the X simultaneously, with a horizontal slab cut through
+  the upper third referencing the M. The corners of the slab terminate
+  at the diagonals so the mark reads as one continuous shape, not three
+  letters glued together.
+
+  Strokes are mathematically derived from the canvas: stroke-width is
+  1024 / 8 = 128, the diagonal endpoints land on the 1/6 grid, the slab
+  sits at y = 1024/3, and the inner counter has a 64px corner-radius
+  matching the AppIcon squircle bevel.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" fill="none">
+  <!-- Background squircle, matches macOS app-icon mask. -->
+  <rect x="0" y="0" width="1024" height="1024" rx="224" ry="224" fill="#0E0E11"/>
+
+  <!-- Subtle inner grid hairline so the wordmark sits in a frame.
+       Removed in the small-size variants (16, 32) — see vmlx-mark-small.svg. -->
+  <rect x="64" y="64" width="896" height="896" rx="160" ry="160"
+        stroke="#1C1C22" stroke-width="2" fill="none"/>
+
+  <g fill="none" stroke="#F5F5F7" stroke-width="128"
+     stroke-linecap="square" stroke-linejoin="miter">
+    <!-- Left diagonal of the V/X. -->
+    <line x1="208" y1="240" x2="512" y2="784"/>
+    <!-- Right diagonal of the V/X. -->
+    <line x1="816" y1="240" x2="512" y2="784"/>
+    <!-- Horizontal slab — the "M crossbar" cutting through the upper third. -->
+    <line x1="288" y1="384" x2="736" y2="384"/>
+  </g>
+
+  <!-- Single accent dot bottom-right marks the apex / "active" indicator
+       (mirrors the engine state pill in TrayItem). -->
+  <circle cx="800" cy="800" r="48" fill="#5B9DFF"/>
+</svg>
