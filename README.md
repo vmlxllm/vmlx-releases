@@ -5,7 +5,10 @@
 
 <h1 align="center">vMLX — Swift (dev branch)</h1>
 
-<p align="center"><strong>For a production Swift engine, please use <a href="https://osaurus.ai">osaurus.ai</a>.</strong></p>
+<p align="center">
+  <strong>For a production Swift engine with a more streamlined, user-ready feature set, please use <a href="https://osaurus.ai">osaurus.ai</a>.</strong><br/>
+  <em>This tree is where the more experimental engine paths live — DDFlash, JANG smelt, JANGTQ, Flash MoE, hybrid-SSM cache work, and other research-y directions that aren't ready for a shipping product yet.</em>
+</p>
 
 ---
 
