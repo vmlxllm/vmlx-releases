@@ -37,7 +37,8 @@
 > If you want to **use** vMLX, run the stable Electron +
 > bundled-Python app at
 > **[jjang-ai/mlxstudio](https://github.com/jjang-ai/mlxstudio)**
-> (current release **v1.3.54**). That is the shipping product.
+> (see the [latest release](https://github.com/jjang-ai/mlxstudio/releases/latest)).
+> That is the shipping product.
 >
 > If you want to **use** this Swift dev branch: don't. It's not for
 > that. It exists so a handful of people can try experimental engine
@@ -117,13 +118,32 @@ assumed broken or absent.
 | Terminal mode with `bash` tool auto-inject | ✅ |
 | `/metrics` Prometheus endpoint | ✅ |
 
+### 🆕 Recently landed (since 2026-04-15 mirror)
+
+- **MXTQ PRNG parity — FIXED.** `NumPyPCG64.swift` ships a bit-identical
+  PCG64 port; `JangMXTQDequant` uses it for sign generation. The older
+  `TQHadamard.generateRandomSigns` drand48 path is deprecated with a
+  "do NOT revert" warning. MiniMax-M2.7-JANGTQ-CRACK decodes at
+  46.59 tok/s (Python reference: 44.3). Resolved iter-93, 2026-04-20.
+- **JANGTQ `mxtq_bits` per-role dict (§346).** `JangLoader` accepts
+  both a flat `Int` and a per-role `{shared_expert, routed_expert}`
+  dict — unblocks Qwen3.6-JANGTQ4 garbage-output.
+- **Nemotron Jinja `not in` operator (§341)** — chat templates for
+  Nemotron / Cascade now render correctly.
+- **Multi-family thinking-leak audit (§343 / §344 / §345)** — Qwen3.6,
+  Gemma4, MiniMax reasoning parsers drained at EOS via
+  `parser.finishStreaming`; §15 reasoning-off → `.content` reroute
+  verified across families.
+- **MCP toggle resolver (§342)** and **clipboard import (§340)** —
+  paste a Claude Desktop `mcpServers` JSON blob; allowlisted entries
+  import via `MCPClipboardImport.swift`.
+- **JSON-Schema tool argument coercion (§338, vmlx#47)** — stringly-typed
+  LLM tool args are coerced to declared schema types before dispatch.
+- **Image model folder discovery (§339, mlxstudio #82/#85/#96)** —
+  Flux / Qwen-Image / Z-Image layouts auto-detected from disk.
+
 ### ⚠️ Partial / flaky
 
-- **MXTQ PRNG mismatch** — Swift `JangMXTQDequant` uses POSIX
-  `srand48`; Python writer uses NumPy PCG64. Sign sequences diverge →
-  some MXTQ bundles decode garbage weights. Known blocker for several
-  JANGTQ checkpoints. Fix: port PCG64 to Swift or re-seed the Python
-  writer.
 - **Engine.LoadOptions default drift** — stricter cache defaults
   (`cacheMemoryPercent=0.10`, `maxCacheBlocks=500`) than
   `GlobalSettings` (`0.30` / `1000`). Code paths that construct
@@ -287,11 +307,9 @@ Tracked day-to-day in `PROGRESS.md`. High-level headline items in
 priority order:
 
 **Blockers for a first user-visible release:**
-1. **MXTQ PRNG parity** — currently produces garbage for some JANGTQ
-   bundles.
-2. **Image generation `.generate()` bodies** — Flux/Qwen-Image/Z-Image
+1. **Image generation `.generate()` bodies** — Flux/Qwen-Image/Z-Image
    forward passes still scaffolded.
-3. **xcodegen .app bundling** — manual assembly works; fix so
+2. **xcodegen .app bundling** — manual assembly works; fix so
    `xcodebuild archive` produces a proper `.app`.
 
 **Model-family coverage (F-G matrix — 23 items tracked):**
