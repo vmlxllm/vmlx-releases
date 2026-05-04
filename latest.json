@@ -1,12 +1,12 @@
 {
-  "version": "1.5.14",
-  "url": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.14/vMLX-1.5.14-arm64.dmg",
+  "version": "1.5.15",
+  "url": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.15/vMLX-1.5.15-arm64.dmg",
   "swiftUrl": "https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-rc.1/vMLX-2.0.0-rc.1-arm64.dmg",
   "swiftVersion": "2.0.0-rc.1",
   "swiftBetaUrl": "https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-rc.1/vMLX-2.0.0-rc.1-arm64.dmg",
   "swiftBetaVersion": "2.0.0-rc.1",
-  "notes": "Python 1.5.14 — three runtime hotfixes on top of 1.5.13. (1) Paged + prefix cache now actually stores on multi-turn chat: removed the benchmark-era output_len≤3 store-skip in scheduler._cleanup_finished that was killing paged cache for short-reply chat — turn 2 of identical prompts now hits paged + disk L2 (live-verified 27s → 350ms = 78×). (2) DSV4 fast-load (sidecar) now runs _fix_quantized_bits + MLA bit-inference after wiring TurboQuantSwitchLinear, so embed/lm_head dequantize doesn't fail on the first inference call. (3) JANGTQ_K bundles built today: convert script now migrates legacy rope_scaling → rope_parameters at config-emit time so transformers 4.45+ AutoTokenizer.from_pretrained loads them without the 'max_position_embeddings' AttributeError. All four API protocols (/v1/chat/completions, /v1/messages, /api/chat, /v1/responses) share the same engine + scheduler and therefore benefit from the cache-store fix uniformly.",
+  "notes": "Python 1.5.15 — two MoE throughput hotfixes on top of 1.5.14. (1) Hybrid SSM models (Qwen3.5/3.6 MoE, Nemotron-H, Gemma 4 hybrid) no longer hit `UnboundLocalError: SSM_REDERIVE_MIN_TOKENS` in scheduler._cleanup_finished on every non-thinking turn — constants hoisted to module scope so both `_gpl > 0` and `_gpl == 0` branches see them. Live-verified Qwen3.5-35B-A3B-JANG_4K and Qwen3.6-35B-A3B-JANGTQ4 went from ~60 t/s (with cleanup error firing per request) to 70-78 t/s (clean). (2) Big MoE bundles (MiniMax 38 GB JANGTQ2, etc.) no longer SIGKILL during decode: jang_loader._set_wired_limit_for_model headroom bumped from a flat 8 GB to max(16 GB, 30 % of model size). 8 GB was tight for routed-expert dequant + KV + Metal scratch on first inference; the new heuristic stays under max_recommended_working_set on M-series with ≥96 GB. MiniMax-M2.7-Small-JANGTQ now decodes cleanly at 39 t/s instead of being killed by the kernel on first prompt. All four API protocols inherit both fixes via the shared scheduler/loader path.",
   "primary": "swift",
-  "legacyUrl": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.14/vMLX-1.5.14-arm64.dmg",
-  "legacyVersion": "1.5.14"
+  "legacyUrl": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.15/vMLX-1.5.15-arm64.dmg",
+  "legacyVersion": "1.5.15"
 }
