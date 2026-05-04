@@ -1,12 +1,12 @@
 {
-  "version": "1.5.10",
-  "url": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.10/vMLX-1.5.10-arm64.dmg",
+  "version": "1.5.12",
+  "url": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.12/vMLX-1.5.12-arm64.dmg",
   "swiftUrl": "https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-rc.1/vMLX-2.0.0-rc.1-arm64.dmg",
   "swiftVersion": "2.0.0-rc.1",
   "swiftBetaUrl": "https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-rc.1/vMLX-2.0.0-rc.1-arm64.dmg",
   "swiftBetaVersion": "2.0.0-rc.1",
-  "notes": "Python 1.5.10 — DSV4-Flash JANGTQ runtime fully fixed. Forces DSV4_LONG_CTX=1 and patches the upstream JANG prefill mask-trim bug in-process. Multi-turn recall, instruct, reasoning, and max modes all verified live on DeepSeek-V4-Flash-JANGTQ2. Swift 2.0.0-rc.1 ships in parallel as the native Mac app, Developer-ID notarized + stapled.",
+  "notes": "Python 1.5.12 — DSV4 instant load (~36× faster reload via pre-stacked sidecar) + paged/L2 cache re-enabled for HSA/CSA/SWA combo cache (live-verified 1032-token identical-prompt repeat: 34s → 1s, 1031 tokens saved, 17 disk writes). Swift 2.0.0-rc.1 ships in parallel as the native Mac app, Developer-ID notarized + stapled.",
   "primary": "swift",
-  "legacyUrl": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.10/vMLX-1.5.10-arm64.dmg",
-  "legacyVersion": "1.5.10"
+  "legacyUrl": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.12/vMLX-1.5.12-arm64.dmg",
+  "legacyVersion": "1.5.12"
 }
