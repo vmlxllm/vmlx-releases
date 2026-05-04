@@ -1,12 +1,12 @@
 {
-  "version": "1.4.0",
-  "url": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.4.0/vMLX-1.4.0-arm64.dmg",
-  "swiftBetaUrl": "https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-beta.15/vMLX-2.0.0-beta.15-arm64.dmg",
-  "swiftBetaVersion": "2.0.0-beta.15",
-  "notes": "vMLX v2 (Swift) is now the recommended desktop app. Native Swift + Metal, 50\u201395 t/s on M-series. Pure SwiftUI, zero PyTorch in the hot path. Get the Swift DMG at https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-beta.15/vMLX-2.0.0-beta.15-arm64.dmg. The Python panel continues to ship from this manifest under `legacyUrl` for users who prefer the Electron app or run the engine via `pip install vmlx`.",
+  "version": "1.5.10",
+  "url": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.10/vMLX-1.5.10-arm64.dmg",
+  "swiftUrl": "https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-rc.1/vMLX-2.0.0-rc.1-arm64.dmg",
+  "swiftVersion": "2.0.0-rc.1",
+  "swiftBetaUrl": "https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-rc.1/vMLX-2.0.0-rc.1-arm64.dmg",
+  "swiftBetaVersion": "2.0.0-rc.1",
+  "notes": "Python 1.5.10 — DSV4-Flash JANGTQ runtime fully fixed. Forces DSV4_LONG_CTX=1 and patches the upstream JANG prefill mask-trim bug in-process. Multi-turn recall, instruct, reasoning, and max modes all verified live on DeepSeek-V4-Flash-JANGTQ2. Swift 2.0.0-rc.1 ships in parallel as the native Mac app, Developer-ID notarized + stapled.",
   "primary": "swift",
-  "swiftUrl": "https://github.com/jjang-ai/vmlx/releases/download/v2.0.0-beta.15/vMLX-2.0.0-beta.15-arm64.dmg",
-  "swiftVersion": "2.0.0-beta.15",
-  "legacyUrl": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.4.0/vMLX-1.4.0-arm64.dmg",
-  "legacyVersion": "1.4.0"
+  "legacyUrl": "https://github.com/jjang-ai/mlxstudio/releases/download/v1.5.10/vMLX-1.5.10-arm64.dmg",
+  "legacyVersion": "1.5.10"
 }
