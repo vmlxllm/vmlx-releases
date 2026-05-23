@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<!--
+  APPLAUDÉ EXPLAINER TEMPLATE  ·  copy this file, keep the entire <style> block, refill the <body>.
+  Save the result to:  $HOME/Desktop/Explainers/{topic-slug}-explainer.html
+  {{MUSTACHE}} markers = swap for your content.  <!-- COMPONENT: ... --> = pick the ones the topic needs.
+  Repeat chapters/cards as needed. Alternate .chapter and .chapter.chapter-flip for rhythm.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{META_DESCRIPTION}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* palette — Claude warm neutral + clay */
+  --pampas:#F0EEE6; --pampas-deep:#E8E5DA; --pampas-shadow:#D9D5C7; --bone:#FAF9F5;
+  --ink:#1F1E1D; --ink-soft:#3D3D3A; --ink-quiet:#6B6A65; --ink-whisper:#A09E96;
+  --crail:#C96442; --crail-deep:#A84F31; --crail-tint:#E8B89F;
+  --leaf:#8B9D7E; --sky:#6B8AA8;
+
+  /* type — licensed faces first, Google cousins as fallback */
+  --font-display:'Tiempos Headline','Fraunces','Times New Roman',Georgia,serif;
+  --font-body:'Tiempos Text','Fraunces',Georgia,serif;
+  --font-sans:'Styrene B','Styrene B LC','Geist','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --font-ui:'Geist','Helvetica Neue',system-ui,sans-serif;
+  --font-mono:'Geist Mono','SF Mono',Menlo,Consolas,monospace;
+
+  /* scale */
+  --t-mega:clamp(64px,11vw,168px); --t-hero:clamp(48px,7vw,104px);
+  --t-display:clamp(36px,4.5vw,64px); --t-h1:clamp(32px,3.6vw,48px);
+  --t-h2:clamp(24px,2.4vw,32px); --t-h3:20px;
+  --t-body:18px; --t-small:15px; --t-caption:13px; --t-micro:11px;
+
+  /* radii & shadow */
+  --r-sm:6px; --r-md:12px; --r-lg:20px; --r-xl:32px; --r-pill:999px;
+  --shadow-soft:0 2px 18px rgba(31,30,29,.06),0 1px 3px rgba(31,30,29,.04);
+  --shadow-lift:0 12px 40px rgba(31,30,29,.08),0 2px 8px rgba(31,30,29,.04);
+  --shadow-deep:0 30px 80px rgba(31,30,29,.12),0 8px 24px rgba(31,30,29,.06);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--pampas); color:var(--ink);
+  font-family:var(--font-body); font-size:var(--t-body); line-height:1.55;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  font-feature-settings:"kern","liga","calt";
+  overflow-x:hidden;
+}
+::selection{background:var(--crail); color:var(--bone)}
+em{color:var(--crail); font-style:italic}
+code{
+  font-family:var(--font-mono); font-size:.86em;
+  background:var(--bone); border:.5px solid rgba(31,30,29,.12);
+  padding:.12em .42em; border-radius:var(--r-sm); color:var(--ink-soft);
+  white-space:nowrap;
+}
+a{color:inherit}
+
+/* grain */
+.grain::before{
+  content:""; position:absolute; inset:0; pointer-events:none; mix-blend-mode:multiply;
+  opacity:.6; background-image:radial-gradient(rgba(31,30,29,.18) .5px, transparent .5px);
+  background-size:3px 3px;
+}
+
+/* nav */
+.app-nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 32px;
+  background:rgba(240,238,230,.78); backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:.5px solid rgba(31,30,29,.10);
+}
+.nav-mark{font-family:var(--font-display); font-size:21px; letter-spacing:-.01em}
+.nav-mark em{font-style:italic}
+.nav-links{display:flex; gap:4px; align-items:center}
+.nav-links a{
+  font-family:var(--font-ui); font-size:13px; text-decoration:none; color:var(--ink-soft);
+  padding:8px 14px; border-radius:var(--r-pill); transition:background .2s, color .2s;
+}
+.nav-links a:hover{background:rgba(31,30,29,.05); color:var(--ink)}
+.nav-meta{font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; color:var(--ink-quiet)}
+@media(max-width:760px){ .nav-links{display:none} }
+
+/* hero */
+.hero{
+  position:relative; min-height:100vh; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; text-align:center;
+  padding:120px 32px 80px; gap:30px;
+}
+.hero-eyebrow{
+  display:inline-flex; align-items:center; gap:9px;
+  font-family:var(--font-ui); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-quiet);
+  background:rgba(250,249,245,.7); backdrop-filter:blur(10px);
+  border:.5px solid rgba(31,30,29,.14); border-radius:var(--r-pill);
+  padding:9px 16px;
+}
+.hero-dot{
+  width:6px; height:6px; border-radius:50%; background:var(--crail);
+  box-shadow:0 0 0 0 rgba(201,100,66,.5); animation:pulse 2.4s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(201,100,66,.45)}
+  70%{box-shadow:0 0 0 8px rgba(201,100,66,0)}
+  100%{box-shadow:0 0 0 0 rgba(201,100,66,0)}
+}
+.hero h1{
+  font-family:var(--font-display); font-weight:400;
+  font-size:var(--t-hero); line-height:1.0; letter-spacing:-.045em;
+  max-width:14ch; text-wrap:balance;
+}
+.hero h1 em{font-style:italic}
+.hero-lede{
+  font-family:var(--font-body); font-size:21px; line-height:1.55; color:var(--ink-soft);
+  max-width:640px;
+}
+.hero-lede strong{color:var(--ink); font-weight:600}
+.hero-cta{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:6px}
+
+/* buttons */
+.btn{
+  font-family:var(--font-ui); font-size:14px; font-weight:500; letter-spacing:-.005em;
+  text-decoration:none; padding:12px 22px; border-radius:var(--r-pill);
+  display:inline-flex; align-items:center; gap:8px; transition:all .18s cubic-bezier(.2,.7,.2,1);
+  cursor:pointer; border:none;
+}
+.btn-primary{background:var(--ink); color:var(--bone)}
+.btn-primary:hover{background:var(--crail); transform:translateY(-1px); box-shadow:var(--shadow-lift)}
+.btn-ghost{background:transparent; color:var(--ink); border:.5px solid rgba(31,30,29,.18)}
+.btn-ghost:hover{background:rgba(31,30,29,.04)}
+
+/* stats strip */
+.stats{
+  max-width:1100px; margin:0 auto; padding:0 32px;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  border-top:.5px solid rgba(31,30,29,.14); border-bottom:.5px solid rgba(31,30,29,.14);
+}
+.stat{padding:44px 22px; text-align:center; border-right:.5px solid rgba(31,30,29,.10)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:var(--font-display); font-size:clamp(40px,5vw,60px); line-height:1; letter-spacing:-.03em}
+.stat:nth-child(2) .stat-n, .stat:nth-child(3) .stat-n{font-style:italic; color:var(--crail)}
+.stat-n .u{font-size:.5em; color:var(--ink-quiet); font-style:normal; letter-spacing:0}
+.stat-l{font-family:var(--font-ui); font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-quiet); margin-top:12px}
+@media(max-width:760px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(1),.stat:nth-child(2){border-bottom:.5px solid rgba(31,30,29,.10)}
+}
+
+/* chapters */
+.chapter{padding:130px 32px; position:relative}
+.chapter-flip{background:var(--pampas-deep)}
+.chapter-inner{max-width:880px; margin:0 auto}
+.chapter-num{font-family:var(--font-display); font-style:italic; font-size:22px; color:var(--crail); margin-bottom:18px}
+.chapter-h{
+  font-family:var(--font-display); font-weight:400; font-size:var(--t-display);
+  line-height:1.08; letter-spacing:-.025em; text-wrap:balance; max-width:18ch;
+}
+.chapter-h .muted{font-style:italic; color:var(--ink-quiet)}
+.chapter-p{font-family:var(--font-body); font-size:19px; line-height:1.62; color:var(--ink-soft); max-width:640px; margin-top:26px}
+.chapter-p + .chapter-p{margin-top:20px}
+.chapter-p strong{color:var(--ink); font-weight:600}
+.h-sub{
+  font-family:var(--font-ui); font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--ink-quiet); margin:54px 0 22px; display:flex; align-items:center; gap:12px;
+}
+.h-sub::after{content:""; flex:1; height:.5px; background:rgba(31,30,29,.14)}
+
+/* flow diagram */
+.flow-grid{
+  display:grid; grid-template-columns:1fr auto 1fr auto 1fr auto 1fr; gap:0;
+  align-items:stretch; margin-top:44px;
+}
+.flow-step{
+  background:var(--bone); border-radius:var(--r-lg); border:.5px solid rgba(31,30,29,.12);
+  box-shadow:var(--shadow-soft); padding:28px 22px; min-height:220px;
+  display:flex; flex-direction:column;
+}
+.flow-num{font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--ink-whisper)}
+.flow-title{font-family:var(--font-display); font-size:26px; letter-spacing:-.02em; margin-top:12px}
+.flow-sub{font-family:var(--font-mono); font-size:12px; color:var(--crail); margin-top:6px}
+.flow-body{font-family:var(--font-body); font-size:14.5px; line-height:1.5; color:var(--ink-soft); margin-top:auto; padding-top:18px}
+.flow-arrow{display:flex; align-items:center; justify-content:center; color:var(--ink-whisper); font-size:20px; padding:0 6px}
+@media(max-width:880px){
+  .flow-grid{grid-template-columns:1fr}
+  .flow-arrow{transform:rotate(90deg); padding:14px 0}
+  .flow-step{min-height:0}
+}
+
+/* yaml / code window */
+.yaml-card{
+  background:var(--bone); border-radius:var(--r-md); border:.5px solid rgba(31,30,29,.14);
+  box-shadow:var(--shadow-lift); overflow:hidden; margin-top:34px;
+}
+.yaml-head{
+  display:flex; align-items:center; gap:8px; padding:11px 16px;
+  background:var(--pampas); border-bottom:.5px solid rgba(31,30,29,.10);
+}
+.dot{width:10px; height:10px; border-radius:50%}
+.dot.r{background:#E66B5C} .dot.y{background:#E5C76B} .dot.g{background:#8DBE7A}
+.yaml-file{font-family:var(--font-mono); font-size:12px; color:var(--ink-quiet); margin-left:8px}
+.yaml-body{padding:20px 22px; font-family:var(--font-mono); font-size:13px; line-height:1.75; overflow-x:auto}
+.yaml-body .l{display:block; white-space:pre}
+.k{color:var(--crail)} .s{color:var(--leaf)} .n{color:var(--sky)} .c{color:var(--ink-whisper); font-style:italic} .d{color:var(--ink-quiet)}
+
+/* note card (verified state) */
+.note-card{
+  background:var(--bone); border-radius:var(--r-lg); border:.5px solid rgba(31,30,29,.12);
+  box-shadow:var(--shadow-deep); padding:26px 28px; margin-top:34px; max-width:560px;
+}
+.note-head{display:flex; align-items:center; gap:12px}
+.note-circle{width:18px; height:18px; border-radius:50%; border:1.5px solid var(--crail); flex:none}
+.note-title{font-family:var(--font-mono); font-size:12px; color:var(--ink-soft); letter-spacing:.02em}
+.note-body{font-family:var(--font-mono); font-size:11.5px; line-height:1.8; color:var(--ink-quiet); margin-top:16px}
+.note-body b{color:var(--ink-soft); font-weight:500}
+.note-sync{display:flex; align-items:center; gap:9px; margin-top:18px; padding-top:16px; border-top:.5px solid rgba(31,30,29,.10); font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; color:var(--ink-quiet)}
+.sync-dot{width:6px; height:6px; border-radius:50%; background:var(--leaf); box-shadow:0 0 0 3px rgba(139,157,126,.18)}
+
+/* clay callout (the bombshell) */
+.callout{max-width:880px; margin:0 auto; padding:0 32px}
+.callout-inner{
+  background:var(--ink); color:var(--bone); border-radius:var(--r-xl);
+  padding:54px 48px; position:relative; overflow:hidden; box-shadow:var(--shadow-deep);
+}
+.callout-eye{font-family:var(--font-ui); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--crail-tint)}
+.callout-h{font-family:var(--font-display); font-size:clamp(28px,3.6vw,44px); line-height:1.12; letter-spacing:-.02em; margin-top:18px; text-wrap:balance}
+.callout-h em{color:var(--crail-tint)}
+.callout-p{font-family:var(--font-body); font-size:17px; line-height:1.6; color:rgba(250,249,245,.72); margin-top:20px; max-width:600px}
+
+/* decision matrix */
+.tbl-wrap{margin-top:38px; overflow-x:auto; border-radius:var(--r-md); border:.5px solid rgba(31,30,29,.12); box-shadow:var(--shadow-soft)}
+table.tbl{width:100%; border-collapse:collapse; background:var(--bone); min-width:560px}
+.tbl th{
+  font-family:var(--font-ui); font-size:11px; text-transform:uppercase; letter-spacing:.1em;
+  color:var(--ink-quiet); text-align:left; padding:16px 20px; border-bottom:.5px solid rgba(31,30,29,.14); font-weight:500;
+}
+.tbl td{padding:18px 20px; border-bottom:.5px solid rgba(31,30,29,.08); vertical-align:top; font-family:var(--font-body); font-size:15px; color:var(--ink-soft)}
+.tbl tr:last-child td{border-bottom:none}
+.pick{font-family:var(--font-ui); font-weight:500; color:var(--ink); font-size:14px}
+.why{font-family:var(--font-body); font-size:14.5px; color:var(--ink-quiet); line-height:1.5}
+
+/* ledger rows */
+.ledger{margin-top:36px; border-top:.5px solid rgba(31,30,29,.14)}
+.ledger-row{display:grid; grid-template-columns:34px 1fr; gap:18px; padding:22px 4px; border-bottom:.5px solid rgba(31,30,29,.10); align-items:start}
+.ledger-i{font-family:var(--font-mono); font-size:13px; color:var(--crail); padding-top:2px}
+.ledger-t{font-family:var(--font-display); font-size:20px; letter-spacing:-.01em}
+.ledger-b{font-family:var(--font-body); font-size:15px; color:var(--ink-soft); line-height:1.55; margin-top:6px}
+.tag-good{color:var(--leaf); font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase}
+.tag-warn{color:var(--crail); font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase}
+
+/* closing */
+.closing{padding:140px 32px; text-align:center}
+.closing-mark{font-family:var(--font-display); font-style:italic; font-size:72px; color:var(--crail); line-height:1}
+.closing-h{font-family:var(--font-display); font-size:var(--t-display); letter-spacing:-.025em; line-height:1.1; margin-top:24px; text-wrap:balance; max-width:16ch; margin-left:auto; margin-right:auto}
+.closing-p{font-family:var(--font-body); font-size:19px; color:var(--ink-soft); max-width:560px; margin:24px auto 0}
+.closing-cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:36px}
+
+/* footer */
+footer{border-top:.5px solid rgba(31,30,29,.14); padding:56px 32px; background:var(--pampas-deep)}
+.foot-inner{max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap}
+.foot-gift{font-family:var(--font-display); font-size:20px; max-width:30ch; line-height:1.3}
+.foot-gift em{font-style:italic}
+.foot-meta{font-family:var(--font-mono); font-size:11px; letter-spacing:.04em; color:var(--ink-quiet); line-height:2}
+.sources{max-width:1100px; margin:40px auto 0; padding-top:28px; border-top:.5px solid rgba(31,30,29,.10)}
+.sources-h{font-family:var(--font-ui); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-quiet); margin-bottom:16px}
+.sources a{display:block; font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); text-decoration:none; padding:7px 0; border-bottom:.5px solid rgba(31,30,29,.06); transition:color .2s}
+.sources a:hover{color:var(--crail)}
+.sources a::before{content:"↗ "; color:var(--ink-whisper)}
+
+/* reveal */
+.reveal{opacity:0; transform:translateY(24px); transition:opacity 1.2s cubic-bezier(.2,.7,.2,1), transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1; transform:none}
+.lede-note{font-family:var(--font-mono); font-size:12px; color:var(--ink-whisper); letter-spacing:.03em; margin-top:14px}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="app-nav">
+  <div class="nav-mark">{{MARK}} <em>{{MARK_KIND}}</em></div>
+  <div class="nav-links">
+    <a href="#c1">{{NAV_1}}</a>
+    <a href="#c2">{{NAV_2}}</a>
+    <a href="#c3">{{NAV_3}}</a>
+    <a href="#c4">{{NAV_4}}</a>
+  </div>
+  <div class="nav-meta">{{NAV_META}}</div>
+</nav>
+
+<!-- HERO  (eyebrow pill · serif h1 with ONE clay-italic accent · 3-sentence lede · CTA pair) -->
+<header class="hero grain">
+  <span class="hero-eyebrow"><span class="hero-dot"></span> {{EYEBROW}}</span>
+  <h1>{{HEAD_A}} <em>{{ACCENT_WORD}}</em> {{HEAD_B}}</h1>
+  <p class="hero-lede">{{LAZY_STORY}} The <strong>real</strong> story: {{REAL_STORY}}. {{CALL_TO_READ}}</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#c1">{{CTA_PRIMARY}} ↓</a>
+    <a class="btn btn-ghost" href="{{SOURCE_URL}}" target="_blank" rel="noopener">{{CTA_GHOST}} ↗</a>
+  </div>
+  <p class="lede-note">{{PROVENANCE_LINE}}</p>
+</header>
+
+<!-- STATS  (4 headline numbers; 2nd & 3rd auto-render italic clay) -->
+<section class="stats reveal">
+  <div class="stat"><div class="stat-n">{{N1}}</div><div class="stat-l">{{L1}}</div></div>
+  <div class="stat"><div class="stat-n">{{N2}}</div><div class="stat-l">{{L2}}</div></div>
+  <div class="stat"><div class="stat-n">{{N3}}</div><div class="stat-l">{{L3}}</div></div>
+  <div class="stat"><div class="stat-n">{{N4}}<span class="u">{{U4}}</span></div><div class="stat-l">{{L4}}</div></div>
+</section>
+
+<!-- CHAPTER  (repeat; alternate plain / .chapter-flip). Drop in the components the chapter needs. -->
+<section class="chapter" id="c1">
+  <div class="chapter-inner reveal">
+    <div class="chapter-num">Chapter I</div>
+    <h2 class="chapter-h">{{CHAPTER_HEAD}} <span class="muted">{{MUTED_CLAUSE}}</span></h2>
+    <p class="chapter-p">{{BODY}} Quote IDs as <code>{{ID}}</code> and numbers like <strong>{{NUMBER}}</strong>.</p>
+
+    <!-- COMPONENT: flow grid (sequence / loop / pipeline) -->
+    <div class="flow-grid">
+      <div class="flow-step"><div class="flow-num">01</div><div class="flow-title">{{STEP1}}</div><div class="flow-sub">{{SUB1}}</div><div class="flow-body">{{BODY1}}</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-num">02</div><div class="flow-title">{{STEP2}}</div><div class="flow-sub">{{SUB2}}</div><div class="flow-body">{{BODY2}}</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-num">03</div><div class="flow-title">{{STEP3}}</div><div class="flow-sub">{{SUB3}}</div><div class="flow-body">{{BODY3}}</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-num">04</div><div class="flow-title">{{STEP4}}</div><div class="flow-sub">{{SUB4}}</div><div class="flow-body">{{BODY4}}</div></div>
+    </div>
+
+    <!-- COMPONENT: yaml/code card -->
+    <div class="yaml-card">
+      <div class="yaml-head"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="yaml-file">{{FILENAME}}</span></div>
+      <div class="yaml-body"><span class="l"><span class="c"># {{COMMENT}}</span></span><span class="l"><span class="k">{{KEY}}</span> <span class="s">{{STRING}}</span></span><span class="l"><span class="d">value:</span> <span class="n">{{NUMBER}}</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter chapter-flip" id="c2">
+  <div class="chapter-inner reveal">
+    <div class="chapter-num">Chapter II</div>
+    <h2 class="chapter-h">{{CHAPTER_HEAD}} <span class="muted">{{MUTED_CLAUSE}}</span></h2>
+    <p class="chapter-p">{{BODY}}</p>
+
+    <!-- COMPONENT: ledger (numbered findings) -->
+    <div class="h-sub">{{SUBHEAD}}</div>
+    <div class="ledger">
+      <div class="ledger-row"><div class="ledger-i">①</div><div><div class="ledger-t">{{FINDING_1}}</div><div class="ledger-b">{{DETAIL_1}}</div></div></div>
+      <div class="ledger-row"><div class="ledger-i" style="color:var(--leaf)">✓</div><div><div class="ledger-t">{{FINDING_2}}</div><div class="ledger-b"><span class="tag-good">verified</span> &nbsp; {{DETAIL_2}}</div></div></div>
+    </div>
+
+    <!-- COMPONENT: note card (a verified / synced state) -->
+    <div class="note-card">
+      <div class="note-head"><span class="note-circle"></span><span class="note-title">{{NOTE_TITLE}}</span></div>
+      <div class="note-body"><b>{{K1}}</b> → {{V1}}<br><b>{{K2}}</b> → {{V2}}</div>
+      <div class="note-sync"><span class="sync-dot"></span> {{SYNC_LINE}}</div>
+    </div>
+  </div>
+</section>
+
+<!-- CALLOUT  (the ONE bombshell finding — dark card) -->
+<section class="callout reveal" style="padding-top:30px; padding-bottom:30px">
+  <div class="callout-inner grain">
+    <div class="callout-eye">{{CALLOUT_EYEBROW}}</div>
+    <div class="callout-h">{{CALLOUT_A}} <em>{{CALLOUT_ACCENT}}</em> {{CALLOUT_B}}</div>
+    <p class="callout-p">{{CALLOUT_BODY}}</p>
+  </div>
+</section>
+
+<!-- CHAPTER with decision matrix (the cheat sheet) -->
+<section class="chapter" id="c3">
+  <div class="chapter-inner reveal">
+    <div class="chapter-num">Chapter III</div>
+    <h2 class="chapter-h">{{CHAPTER_HEAD}} <span class="muted">{{MUTED_CLAUSE}}</span></h2>
+    <p class="chapter-p">{{BODY}}</p>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead><tr><th>{{COL1}}</th><th>{{COL2}}</th><th>{{COL3}}</th></tr></thead>
+        <tbody>
+          <tr><td>{{ROW1_A}}</td><td><div class="pick">{{ROW1_PICK}}</div></td><td><div class="why">{{ROW1_WHY}}</div></td></tr>
+          <tr><td>{{ROW2_A}}</td><td><div class="pick">{{ROW2_PICK}}</div></td><td><div class="why">{{ROW2_WHY}}</div></td></tr>
+          <tr><td>{{ROW3_A}}</td><td><div class="pick">{{ROW3_PICK}}</div></td><td><div class="why">{{ROW3_WHY}}</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing reveal">
+  <div class="closing-mark">✦</div>
+  <h2 class="closing-h">{{CLOSING_HEAD}}</h2>
+  <p class="closing-p">{{CLOSING_BODY}}</p>
+  <div class="closing-cta">
+    <a class="btn btn-primary" href="{{SOURCE_URL}}" target="_blank" rel="noopener">{{CLOSE_CTA}} ↗</a>
+    <a class="btn btn-ghost" href="#c1">Back to the top ↑</a>
+  </div>
+</section>
+
+<!-- FOOTER + SOURCES -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-gift">{{GIFT_A}} <em>{{GIFT_ACCENT}}</em> {{GIFT_B}}</div>
+    <div class="foot-meta">{{META_1}}<br>{{META_2}}<br>Applaudé editorial language</div>
+  </div>
+  <div class="sources">
+    <div class="sources-h">Sources</div>
+    <a href="{{SRC_URL_1}}" target="_blank" rel="noopener">{{SRC_LABEL_1}}</a>
+    <a href="{{SRC_URL_2}}" target="_blank" rel="noopener">{{SRC_LABEL_2}}</a>
+  </div>
+</footer>
+
+<script>
+// reveal-on-scroll
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// nav active on scroll
+const links = [...document.querySelectorAll('.nav-links a')];
+const sections = links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const navIo = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      links.forEach(l=>l.style.background='');
+      const active = links.find(l=>l.getAttribute('href')==='#'+e.target.id);
+      if(active) active.style.background='rgba(31,30,29,0.06)';
+    }
+  });
+}, { rootMargin:'-45% 0px -50% 0px' });
+sections.forEach(s=>navIo.observe(s));
+</script>
+</body>
+</html>
